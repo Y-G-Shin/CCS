@@ -22,3 +22,14 @@
 # misc
 .DS_Store
 Thumbs.db
+
+# ---- .NET ----
+[Bb]in/
+[Oo]bj/
+*.user
+*.rsuser
+*.suo
+*.cache
+*.log
+*.vs/
+*.vscode/

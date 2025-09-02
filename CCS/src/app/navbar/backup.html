@@ -6,14 +6,9 @@
       </ul>
     </nav>-->
 
-<header 
-class="w-full fixed top-0 left-0 z-50 transition-all duration-700 ease-in-out"
-[ngClass]="{ 
-      'bg-black/5': isScrolled, 
-    'bg-white': !isScrolled 
-  }">
-   <nav class="flex items-center justify-between max-w-7xl mx-auto h-16 px-6"> 
-       <div class="flex items-center space-x-4">
+<header class="w-full bg-white shadow-md">
+   <nav class="flex items-center justify-between h-16"> 
+     
      <a 
       routerLink="/" 
       id="logo"
@@ -21,24 +16,32 @@ class="w-full fixed top-0 left-0 z-50 transition-all duration-700 ease-in-out"
       IMG-PLACEHOLDER
     </a>
 <!-- Phone view -->
+      <button 
+  (click)="isMenuOpen = !isMenuOpen" 
+  class="md:hidden p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+>
+
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" 
+       viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+          d="M4 6h16M4 12h16M4 18h16" />
+  </svg>
+</button>
    <!-- End -->
-
- <ul id="main-nav" class="hidden md:flex h-full group">
-  @for (link of links; track link.path) {
-    <li 
-      class="h-full relative group/item group-hover:text-gray-400 hover:!text black transition-colors" 
-      id="nav-{{link.label | lowercase }}"
-    >
-      <a
-        [routerLink]="link.path"
-        class="flex items-center h-full px-6 transition-colors hover:bg-gray-100 hover:text-black"
-      >
-        {{ link.label }}
-      </a>
-
-      @if (link.children) {
+  
+   <ul id="main-nav" class="hidden md:flex h-full">
+      @for (link of links; track link.path) {
+        <li class="h-full relative group" id="nav-{{link.label | lowercase }}">
+          <a
+            [routerLink]="link.path"
+            class="flex items-center h-full px-6 transition-colors hover:bg-gray-100 hover:text-blue-600"
+            
+          >
+            {{ link.label }}
+          </a>
+          @if (link.children) {
         <div 
-          class="absolute top-full left-0 hidden group-hover/item:block bg-white shadow-lg rounded-b-md z-10 w-48"
+          class="absolute top-full left-0 hidden group-hover:block bg-white shadow-lg rounded-b-md z-10 w-48"
         >
           @for (childLink of link.children; track childLink.path) {
             <a
@@ -50,10 +53,10 @@ class="w-full fixed top-0 left-0 z-50 transition-all duration-700 ease-in-out"
           }
         </div>
       }
-    </li>
-  }
-</ul>
-       </div>
+        </li>
+      }
+    </ul>
+
  <div class="flex items-center">
       <a 
         routerLink="/login"
@@ -65,18 +68,6 @@ class="w-full fixed top-0 left-0 z-50 transition-all duration-700 ease-in-out"
    </nav>
 
  <!-- Phone view -->
-       <button 
-  (click)="isMenuOpen = !isMenuOpen" 
-  class="md:hidden p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
->
-
-  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" 
-       viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-          d="M4 6h16M4 12h16M4 18h16" />
-  </svg>
-</button>
-
    @if (isMenuOpen) {
  <ul class="flex flex-col bg-white shadow-md md:hidden">
   @for (link of links; track link.path){

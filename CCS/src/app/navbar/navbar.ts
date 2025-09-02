@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component,HostListener } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { RouterModule } from '@angular/router';
 
@@ -13,10 +13,29 @@ import { RouterModule } from '@angular/router';
 export class Navbar {
 
   links =[
-  { path: '/', label: 'Shop'},
+  { path: '/',
+    label: 'Shop',
+    children:[
+      {path:'/', label: 'Cable'},
+      {path: '/', label:'Prebuilds'},
+    ]
+  },
   { path: 'software', label: 'Software'},
   { path: 'hireMe', label: 'Contact'}
 ];
+
+isMenuOpen= false;
+trackByPath(index:number, item:any){
+  return item.path;
+}
+
+isScrolled = false;
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.isScrolled = window.scrollY > 0;
+  }
+
 
 }
 
